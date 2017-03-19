@@ -1,6 +1,7 @@
 package com.hyman.schedule.master.repository;
 
 import java.util.Date;
+import java.util.List;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,5 +38,14 @@ public class TaskRepotoryTest extends DaoBaseJunitTest {
 		}
 	}
 	
+	@Test
+	public void testFindParent(){
+		List<Task> list = taskDao.findPreTask(1);
+		
+		for(Task t : list){
+			System.out.println(t.getName());
+		}
+		
+	}
 
 }

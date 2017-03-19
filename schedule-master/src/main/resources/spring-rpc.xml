@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xmlns:context="http://www.springframework.org/schema/context"
+     xmlns:aop="http://www.springframework.org/schema/aop"
+     xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+     xmlns:core="http://cxf.apache.org/core"
+     xsi:schemaLocation="http://www.springframework.org/schema/beans
+         http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://www.springframework.org/schema/context
+         http://www.springframework.org/schema/context/spring-context.xsd
+         http://cxf.apache.org/jaxrs
+         http://cxf.apache.org/schemas/jaxrs.xsd
+         http://cxf.apache.org/core
+         http://cxf.apache.org/schemas/core.xsd">
+   
+  	<bean id="jsonProvider" class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider" /> 
+	
+	<jaxrs:server id="helloRPC" address="/api">
+	     <jaxrs:features>
+	         <core:logging/>
+	     </jaxrs:features>
+	     <jaxrs:serviceBeans>
+	     	<ref bean="heartBeatRPCImpl" />
+	     	<ref bean="helloRPCImpl" />
+	    </jaxrs:serviceBeans>
+	    <jaxrs:providers>
+	    	<ref bean="jsonProvider"/> 
+	    </jaxrs:providers>
+	    <jaxrs:inInterceptors>
+	    	 <bean class="com.hyman.schedule.master.interceptor.AuthInterceptor" />
+	    </jaxrs:inInterceptors>
+	    
+	</jaxrs:server>
+	
+</beans>  

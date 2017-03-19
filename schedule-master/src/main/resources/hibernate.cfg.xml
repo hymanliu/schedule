@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xmlns:tx="http://www.springframework.org/schema/tx"
+     xsi:schemaLocation="http://www.springframework.org/schema/beans
+         http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://www.springframework.org/schema/tx
+         http://www.springframework.org/schema/tx/spring-tx.xsd">
+ 
+    <bean name="driver" class="com.mysql.jdbc.Driver" />
+	<!-- 配置数据库连接池druid -->
+	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+		<!-- 基本属性 driver、url、user、password -->
+		<property name="driver" ref="driver" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<!-- 初始化连接大小 -->
+		<property name="initialSize" value="1" />
+		<!-- 连接池最大数量 -->
+		<property name="maxActive" value="20" />
+		<!-- 连接池最小空闲 -->
+		<property name="minIdle" value="1" />
+		<!-- 获取连接最大等待时间 -->
+		<property name="maxWait" value="60000" />
+	</bean>
+    
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+	    <property name="dataSource" ref="dataSource"/>
+		<property name="annotatedClasses">
+			<list>
+				<value>com.hyman.schedule.master.entity.Project</value>
+				<value>com.hyman.schedule.master.entity.Task</value>
+				<value>com.hyman.schedule.master.entity.Job</value>
+				<value>com.hyman.schedule.master.entity.TaskRelation</value>
+				<value>com.hyman.schedule.master.entity.JobRelation</value>
+			</list>
+		</property>
+	    <property name="hibernateProperties">
+	      <value>
+	        hibernate.dialect=org.hibernate.dialect.MySQLDialect
+	        hibernate.show_sql=true
+	        hibernate.format_sql=true
+	        hibernate.hbm2ddl.auto=update
+	      </value>
+	    </property>
+    </bean>
+  
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+    	<property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+  
+    <tx:annotation-driven transaction-manager="transactionManager" order="200" proxy-target-class="true"/>
+</beans>  

@@ -26,6 +26,12 @@ public class TaskRepotoryTest extends DaoBaseJunitTest {
 			o.setCycle(Cycle.HOURLY);
 			taskDao.save(o);
 			taskDao.flush();
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 	}

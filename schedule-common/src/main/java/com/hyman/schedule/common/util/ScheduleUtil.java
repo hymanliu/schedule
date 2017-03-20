@@ -49,14 +49,14 @@ public class ScheduleUtil {
 			cal = Calendar.getInstance();
 			cal.setTime(scheduleDate);
 			cal.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
-			System.out.println(DateUtil.format(cal.getTime(), "yyyyMMdd00"));
+			ret = DateUtil.format(cal.getTime(), "yyyyMMdd00");
 			break;
 		case MONTHLY:
 			//周任务 每周日点 作为 scheduleTime
 			cal = Calendar.getInstance();
 			cal.setTime(scheduleDate);
 			cal.set(Calendar.DAY_OF_MONTH, 1);
-			System.out.println(DateUtil.format(cal.getTime(), "yyyyMMdd00"));
+			ret = DateUtil.format(cal.getTime(), "yyyyMMdd00");
 			break;
 		}
 		return ret;

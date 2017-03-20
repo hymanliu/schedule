@@ -1,5 +1,7 @@
 package com.hyman.schedule.master.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,5 +20,15 @@ public class TaskServiceImpl implements TaskService {
 	@Override
 	public Page<Task> findPage(int offset,int limit){
 		return taskDao.findPage(offset, limit);
+	}
+	
+	@Override
+	public List<Task> findPreTask(int id){
+		return taskDao.findPreTask(id);
+	}
+	
+	@Override
+	public List<Task> findSubTask(int id){
+		return taskDao.findSubTask(id);
 	}
 }

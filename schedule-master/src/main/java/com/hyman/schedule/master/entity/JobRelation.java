@@ -22,6 +22,14 @@ public class JobRelation implements Serializable {
 	@Column(name="modify_time",columnDefinition=("datetime default null comment '修改时间'"))
 	private Date modifyTime;
 	
+	public JobRelation(){}
+	
+	public JobRelation(String jobId,String preJobId, Date createTime, Date modifyTime) {
+		super();
+		this.pk = new PK(jobId,preJobId);
+		this.createTime = createTime;
+		this.modifyTime = modifyTime;
+	}
 	public Date getCreateTime() {
 		return createTime;
 	}
@@ -46,9 +54,14 @@ public class JobRelation implements Serializable {
 		private static final long serialVersionUID = 4999862365783207762L;
 		@Column(name="job_id",columnDefinition="varchar(18) not null comment '实例ID'")
 		private String jobId;
-		@Column(name="parent_job_id",columnDefinition="varchar(18) not null comment '父实例ID'")
-		private String parentJobId;
+		@Column(name="pre_job_id",columnDefinition="varchar(18) not null comment '父实例ID'")
+		private String preJobId;
 		public PK() {
+		}
+		public PK(String jobId, String preJobId) {
+			super();
+			this.jobId = jobId;
+			this.preJobId = preJobId;
 		}
 		public String getJobId() {
 			return jobId;
@@ -56,11 +69,11 @@ public class JobRelation implements Serializable {
 		public void setJobId(String jobId) {
 			this.jobId = jobId;
 		}
-		public String getParentJobId() {
-			return parentJobId;
+		public String getPreJobId() {
+			return preJobId;
 		}
-		public void setParentJobId(String parentJobId) {
-			this.parentJobId = parentJobId;
+		public void setPreJobId(String preJobId) {
+			this.preJobId = preJobId;
 		}
 		@Override
 		public int hashCode() {
@@ -68,7 +81,7 @@ public class JobRelation implements Serializable {
 			int result = 1;
 			result = prime * result + ((jobId == null) ? 0 : jobId.hashCode());
 			result = prime * result
-					+ ((parentJobId == null) ? 0 : parentJobId.hashCode());
+					+ ((preJobId == null) ? 0 : preJobId.hashCode());
 			return result;
 		}
 		@Override
@@ -85,10 +98,10 @@ public class JobRelation implements Serializable {
 					return false;
 			} else if (!jobId.equals(other.jobId))
 				return false;
-			if (parentJobId == null) {
-				if (other.parentJobId != null)
+			if (preJobId == null) {
+				if (other.preJobId != null)
 					return false;
-			} else if (!parentJobId.equals(other.parentJobId))
+			} else if (!preJobId.equals(other.preJobId))
 				return false;
 			return true;
 		}

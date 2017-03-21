@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.hyman.schedule.common.bean.Page;
-import com.hyman.schedule.common.enums.Cycle;
 import com.hyman.schedule.common.enums.JobState;
 import com.hyman.schedule.common.util.ScheduleUtil;
 import com.hyman.schedule.master.entity.Job;
@@ -61,7 +60,7 @@ public class JobServiceImpl implements JobService {
 	 */
 	@Override
 	public void saveJobIfNotExist(Task t,Date scheduleTime){
-		
+
 		String formattedTime = ScheduleUtil.toCycleBeginTime(t.getCycle(), scheduleTime);
 		String jobId = Job.toJobId(t.getId(), formattedTime);
 		boolean isExist = isExist(jobId);
@@ -77,7 +76,7 @@ public class JobServiceImpl implements JobService {
 			if(preList!=null && !preList.isEmpty()){
 				List<JobRelation> jobRelations = new ArrayList<>();
 				for(Task pre : preList){
-					String preCycleBeginTime = ScheduleUtil.toCycleBeginTime(pre.getCycle(), scheduleTime);
+					String preCycleBeginTime = ScheduleUtil.toCycleBeginTime(pre.getCycle(), t.getCycle(), scheduleTime);
 					String preJobId = Job.toJobId(pre.getId(), preCycleBeginTime);
 					Date date = new Date();
 					jobRelations.add(new JobRelation(jobId,preJobId,date,date));

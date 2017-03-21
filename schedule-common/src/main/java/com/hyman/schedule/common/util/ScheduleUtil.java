@@ -62,6 +62,84 @@ public class ScheduleUtil {
 		return ret;
 	}
 
+	public static String toCycleBeginTime(Cycle preCycle,Cycle subCycle,Date subScheduleDate){
+		
+		String ret = null;
+		Calendar cal = null;
+		switch(preCycle){
+		case HOURLY:
+			
+			if(subCycle == Cycle.DAILY){
+				//如果子任务为天任务
+				cal = Calendar.getInstance();
+				cal.setTime(subScheduleDate);
+				cal.set(Calendar.HOUR_OF_DAY,0);
+				cal.setTimeInMillis(cal.getTimeInMillis() - 1*3600*1000L);
+				subScheduleDate = cal.getTime();
+			}else if(subCycle == Cycle.WEEKLY){
+				//如果子任务为周任务
+				cal = Calendar.getInstance();
+				cal.setTime(subScheduleDate);
+				cal.set(Calendar.HOUR_OF_DAY,0);
+				cal.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+				cal.setTimeInMillis(cal.getTimeInMillis() - 1*3600*1000L);
+				subScheduleDate = cal.getTime();
+			}
+			else if(subCycle == Cycle.MONTHLY){
+				//如果子任务为月任务
+				cal = Calendar.getInstance();
+				cal.setTime(subScheduleDate);
+				cal.set(Calendar.HOUR_OF_DAY,0);
+				cal.set(Calendar.DAY_OF_MONTH, 1);
+				cal.setTimeInMillis(cal.getTimeInMillis() - 1*3600*1000L);
+				subScheduleDate = cal.getTime();
+			}
+			ret = DateUtil.format(subScheduleDate, "yyyyMMddHH");
+			break;
+		case DAILY:
+			if(subCycle == Cycle.WEEKLY){
+				//如果子任务为周任务
+				cal = Calendar.getInstance();
+				cal.setTime(subScheduleDate);
+				cal.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+				cal.setTimeInMillis(cal.getTimeInMillis() - 24*3600*1000L);
+				subScheduleDate = cal.getTime();
+			}
+			else if(subCycle == Cycle.MONTHLY){
+				//如果子任务为月任务
+				cal = Calendar.getInstance();
+				cal.setTime(subScheduleDate);
+				cal.set(Calendar.DAY_OF_MONTH, 1);
+				cal.setTimeInMillis(cal.getTimeInMillis() - 24*3600*1000L);
+				subScheduleDate = cal.getTime();
+			}
+			ret = DateUtil.format(subScheduleDate, "yyyyMMdd00");
+			break;
+		case WEEKLY:
+			if(subCycle == Cycle.MONTHLY){
+				//如果子任务为月任务
+				cal = Calendar.getInstance();
+				cal.setTime(subScheduleDate);
+				cal.set(Calendar.DAY_OF_MONTH, 1);
+				cal.setTimeInMillis(cal.getTimeInMillis());
+				subScheduleDate = cal.getTime();
+			}
+			//周任务 每周日点 作为 scheduleTime
+			cal = Calendar.getInstance();
+			cal.setTime(subScheduleDate);
+			cal.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+			ret = DateUtil.format(cal.getTime(), "yyyyMMdd00");
+			break;
+		case MONTHLY:
+			//周任务 每周日点 作为 scheduleTime
+			cal = Calendar.getInstance();
+			cal.setTime(subScheduleDate);
+			cal.set(Calendar.DAY_OF_MONTH, 1);
+			ret = DateUtil.format(cal.getTime(), "yyyyMMdd00");
+			break;
+		}
+		return ret;
+	}
 	
 	public static String toFormattedHex(int val){
 		String hex = Integer.toHexString(val);

@@ -34,7 +34,7 @@ public class TaskDaoImpl extends BaseDaoImpl<Task, Integer> implements TaskDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Task> findPreTask(int id){
-		String hql ="select t1 FROM Task t1,TaskRelation t2 where t1.id=t2.pk.parentTaskId and t2.pk.taskId=:id";
+		String hql ="select t1 FROM Task t1,TaskRelation t2 where t1.id=t2.pk.preTaskId and t2.pk.taskId=:id";
 		Query query=getSession().createQuery(hql).setInteger("id", id);
 		return query.list();
 	}
@@ -43,7 +43,7 @@ public class TaskDaoImpl extends BaseDaoImpl<Task, Integer> implements TaskDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Task> findSubTask(int id){
-		String hql ="select t1 FROM Task t1,TaskRelation t2 where t1.id=t2.pk.taskId and t2.pk.parentTaskId=:id";
+		String hql ="select t1 FROM Task t1,TaskRelation t2 where t1.id=t2.pk.taskId and t2.pk.preTaskId=:id";
 		Query query=this.getSession().createQuery(hql).setInteger("id", id);
 		return query.list();
 	}

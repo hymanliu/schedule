@@ -1,4 +1,4 @@
-package com.hyman.schedule.master.thread;
+package com.hyman.schedule.master.handler;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -16,10 +16,10 @@ import com.hyman.schedule.master.entity.Task;
 import com.hyman.schedule.master.service.JobService;
 import com.hyman.schedule.master.service.TaskService;
 
-@Component("taskScanner")
-public class TaskScanner implements Runnable {
+@Component("jobCreateTracker")
+public class JobCreateTracker implements Runnable {
 
-	static final Logger LOG = LoggerFactory.getLogger(TaskScanner.class);
+	static final Logger LOG = LoggerFactory.getLogger(JobCreateTracker.class);
 	@Autowired TaskService taskService;
 	@Autowired JobService jobService;
 	private int currentOffset = 0;

@@ -36,6 +36,8 @@ public class Job implements Serializable {
 	private Date beginTime;
 	@Column(name="end_time",columnDefinition=("datetime default null comment '执行时间'"))
 	private Date endTime;
+	@Column(name="tries",columnDefinition=("int(4) default 0 comment '尝试次数'"))
+	private Integer tries;
 	
 	public String getId() {
 		return id;
@@ -67,11 +69,15 @@ public class Job implements Serializable {
 	public void setEndTime(Date endTime) {
 		this.endTime = endTime;
 	}
-
 	public void setId(int taskId,String cycleBeginTime){
 		this.id = toJobId(taskId,cycleBeginTime);
 	}
-	
+	public Integer getTries() {
+		return tries;
+	}
+	public void setTries(Integer tries) {
+		this.tries = tries;
+	}
 	public static String toJobId(int taskId,String cycleBeginTime){
 		return ScheduleUtil.toFormattedHex(taskId)+cycleBeginTime;
 	}

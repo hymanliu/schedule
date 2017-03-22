@@ -46,15 +46,15 @@ public class TaskRelation implements Serializable {
 		private static final long serialVersionUID = 4999862365783207762L;
 		@Column(name="task_id",columnDefinition="int(11) not null comment '任务ID'")
 		private Integer taskId;
-		@Column(name="parent_task_id",columnDefinition="int(11) not null comment '父任务ID'")
-		private Integer parentTaskId;
+		@Column(name="pre_task_id",columnDefinition="int(11) not null comment '父任务ID'")
+		private Integer preTaskId;
 		
 		public PK() {
 		}
-		public PK(Integer taskId, Integer parentTaskId) {
+		public PK(Integer taskId, Integer preTaskId) {
 			super();
 			this.taskId = taskId;
-			this.parentTaskId = parentTaskId;
+			this.preTaskId = preTaskId;
 		}
 		public Integer getTaskId() {
 			return taskId;
@@ -62,19 +62,18 @@ public class TaskRelation implements Serializable {
 		public void setTaskId(Integer taskId) {
 			this.taskId = taskId;
 		}
-		public Integer getParentTaskId() {
-			return parentTaskId;
+		public Integer getPreTaskId() {
+			return preTaskId;
 		}
-		public void setParentTaskId(Integer parentTaskId) {
-			this.parentTaskId = parentTaskId;
+		public void setPreTaskId(Integer preTaskId) {
+			this.preTaskId = preTaskId;
 		}
-		
 		@Override
 		public int hashCode() {
 			final int prime = 31;
 			int result = 1;
 			result = prime * result
-					+ ((parentTaskId == null) ? 0 : parentTaskId.hashCode());
+					+ ((preTaskId == null) ? 0 : preTaskId.hashCode());
 			result = prime * result
 					+ ((taskId == null) ? 0 : taskId.hashCode());
 			return result;
@@ -88,10 +87,10 @@ public class TaskRelation implements Serializable {
 			if (getClass() != obj.getClass())
 				return false;
 			PK other = (PK) obj;
-			if (parentTaskId == null) {
-				if (other.parentTaskId != null)
+			if (preTaskId == null) {
+				if (other.preTaskId != null)
 					return false;
-			} else if (!parentTaskId.equals(other.parentTaskId))
+			} else if (!preTaskId.equals(other.preTaskId))
 				return false;
 			if (taskId == null) {
 				if (other.taskId != null)
@@ -100,5 +99,6 @@ public class TaskRelation implements Serializable {
 				return false;
 			return true;
 		}
+		
 	}
 }

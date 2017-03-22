@@ -28,7 +28,8 @@ public class JobServiceImpl implements JobService {
 	@Autowired TaskDao taskDao;
 	
 	@Override
-	public Page<Job> findPage(int offset,int limit){
+	public Page<Job> findPage(Job job, int offset,int limit){
+		//TODO
 		return null;
 	}
 	
@@ -85,5 +86,10 @@ public class JobServiceImpl implements JobService {
 			}
 			
 		}
+	}
+
+	@Override
+	public List<Job> findPreJob(String jobId) {
+		return jobDao.findPreJob(jobId);
 	}
 }

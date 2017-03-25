@@ -3,7 +3,6 @@ package com.hyman.schedule.master.repository.impl;
 import java.util.List;
 
 import org.hibernate.Query;
-import org.hibernate.SQLQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
@@ -68,6 +67,20 @@ public class JobDaoImpl extends BaseDaoImpl<Job, String> implements JobDao {
 		return query.list();
 	}
 
+	/**
+	 * SELECT * FROM t_job t WHERE t.state='EXEC' AND (UNIX_TIMESTAMP(NOW())-UNIX_TIMESTAMP(t.begin_time))/60 > 60
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Job> findOverTimeJob(int maxMin,int limit){
+		String sql = "SELECT * FROM t_job t WHERE t.state='EXEC' AND (UNIX_TIMESTAMP(NOW())-UNIX_TIMESTAMP(t.begin_time))/60>=:maxMin";
+		Query query = this.getSession().createSQLQuery(sql)
+				.addEntity(Job.class)
+				.setInteger("maxMin", maxMin)
+				.setMaxResults(limit);
+		return query.list();
+	}
 
 	
 }

@@ -27,6 +27,8 @@ public class Job implements Serializable {
 	@GenericGenerator(name = "idGenerator", strategy = "assigned")
 	@GeneratedValue(generator = "idGenerator")
 	private String id;
+	@Column(name="task_id",columnDefinition=("int default null comment '任务ID'"))
+	private Integer taskId;
 	@Column(name="state",columnDefinition="varchar(20) not null comment '实例状态'")
 	@Enumerated(EnumType.STRING)
 	private JobState state;
@@ -38,14 +40,18 @@ public class Job implements Serializable {
 	private Date endTime;
 	@Column(name="tries",columnDefinition=("int(4) default 0 comment '尝试次数'"))
 	private Integer tries;
-	@Column(name="priority",columnDefinition=("int(4) default 0 comment '优先级'"))
-	private Integer priority;
 	
 	public String getId() {
 		return id;
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+	public Integer getTaskId() {
+		return taskId;
+	}
+	public void setTaskId(Integer taskId) {
+		this.taskId = taskId;
 	}
 	public JobState getState() {
 		return state;
@@ -82,12 +88,6 @@ public class Job implements Serializable {
 	}
 	public static String toJobId(int taskId,String cycleBeginTime){
 		return ScheduleUtil.toFormattedHex(taskId)+cycleBeginTime;
-	}
-	public Integer getPriority() {
-		return priority;
-	}
-	public void setPriority(Integer priority) {
-		this.priority = priority;
 	}
 }
 

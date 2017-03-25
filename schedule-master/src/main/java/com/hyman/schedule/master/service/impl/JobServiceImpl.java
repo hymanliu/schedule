@@ -70,6 +70,8 @@ public class JobServiceImpl implements JobService {
 		if(!isExist) {
 			Job o = new Job();
 			o.setId(jobId);
+			o.setTaskId(t.getId());
+			o.setTries(0);
 			o.setState(JobState.INIT);
 			o.setCreateTime(new Date());
 			jobDao.save(o);
@@ -102,7 +104,13 @@ public class JobServiceImpl implements JobService {
 
 	@Override
 	public void save(List<Job> list) {
+		if(list==null || list.isEmpty()) return;
 		Job[] entities = list.toArray(new Job[]{});
 		jobDao.save(entities);
+	}
+	
+	@Override
+	public List<Job> findOverTimeJob(int maxMin,int limit){
+		return jobDao.findOverTimeJob(maxMin, limit);
 	}
 }

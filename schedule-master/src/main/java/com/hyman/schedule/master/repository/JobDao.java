@@ -8,6 +8,11 @@ import com.hyman.schedule.master.entity.Job;
 
 public interface JobDao extends GenericDAO<Job, String>{
 
+	/**
+	 * 获取父任务实例
+	 * @param jobId
+	 * @return
+	 */
 	List<Job> findPreJob(String jobId);
 
 	@Deprecated
@@ -20,5 +25,13 @@ public interface JobDao extends GenericDAO<Job, String>{
 	 * @return
 	 */
 	List<Job> findAvailableWaitingJob(int maxtries, int limit);
+
+	/**
+	 * 获取执行中超时的任务实例
+	 * @param maxMin
+	 * @param limit
+	 * @return
+	 */
+	List<Job> findOverTimeJob(int maxMin, int limit);
 
 }

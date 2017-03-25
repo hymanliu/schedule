@@ -40,6 +40,8 @@ public class Task implements Serializable {
 	@Column(name="cycle",columnDefinition="varchar(20) not null comment '调度周期'")
 	@Enumerated(EnumType.STRING)
 	private Cycle cycle;
+	@Column(name="priority",columnDefinition=("int(4) default 0 comment '优先级'"))
+	private Integer priority;
 	
 	public Integer getId() {
 		return id;

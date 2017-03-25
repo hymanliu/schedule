@@ -25,4 +25,12 @@ public interface JobService {
 	List<Job> findPreJob(String jobId);
 
 	List<Job> findAvailableWaitingJob(int maxtries,int limit);
+
+	/**
+	 * 获取EXEC状态  超时的任务实例
+	 * @param maxMin
+	 * @param limit
+	 * @return
+	 */
+	List<Job> findOverTimeJob(int maxMin, int limit);
 }

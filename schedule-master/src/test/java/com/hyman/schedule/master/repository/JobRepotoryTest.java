@@ -40,4 +40,13 @@ public class JobRepotoryTest extends DaoBaseJunitTest {
 			System.out.println(j.getId());
 		}
 	}
+	
+	@Test
+	public void testFindAvailableWaitingJob(){
+		List<Job> list = jobDao.findAvailableWaitingJob(4, 10);
+		
+		for(Job j : list){
+			System.out.println(j.getId());
+		}
+	}
 }

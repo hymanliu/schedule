@@ -1,4 +1,4 @@
-package com.hyman.schedule.master.handler;
+package com.hyman.schedule.master.tracker;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -23,7 +23,7 @@ public class JobCreateTracker implements Runnable {
 	@Autowired TaskService taskService;
 	@Autowired JobService jobService;
 	private int currentOffset = 0;
-	private static final int BATCH_SIZE=2;
+	private static final int BATCH_SIZE=10;
 	@Override
 	public void run() {
 		while(true){
@@ -44,7 +44,7 @@ public class JobCreateTracker implements Runnable {
 				}
 			}
 			try {
-				Thread.sleep(2000L);
+				Thread.sleep(5000L);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

@@ -38,6 +38,8 @@ public class Job implements Serializable {
 	private Date endTime;
 	@Column(name="tries",columnDefinition=("int(4) default 0 comment '尝试次数'"))
 	private Integer tries;
+	@Column(name="priority",columnDefinition=("int(4) default 0 comment '优先级'"))
+	private Integer priority;
 	
 	public String getId() {
 		return id;
@@ -80,6 +82,12 @@ public class Job implements Serializable {
 	}
 	public static String toJobId(int taskId,String cycleBeginTime){
 		return ScheduleUtil.toFormattedHex(taskId)+cycleBeginTime;
+	}
+	public Integer getPriority() {
+		return priority;
+	}
+	public void setPriority(Integer priority) {
+		this.priority = priority;
 	}
 }
 

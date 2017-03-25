@@ -3,7 +3,8 @@ package com.hyman.schedule.master;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.hyman.schedule.master.handler.JobCreateTracker;
+import com.hyman.schedule.master.tracker.JobCreateTracker;
+import com.hyman.schedule.master.tracker.StateChangeTracker;
 
 public class Application {
 	
@@ -14,8 +15,13 @@ public class Application {
 		jettyEmbedServer.start();
 		
 		JobCreateTracker jobCreateTracker = (JobCreateTracker)context.getBean("jobCreateTracker");
-		Thread thread = new Thread(jobCreateTracker);
-		thread.start();
+		Thread jobCreateTrackerThread = new Thread(jobCreateTracker);
+		jobCreateTrackerThread.start();
+		
+		
+		StateChangeTracker stateChangeTracker =  (StateChangeTracker)context.getBean("stateChangeTracker");
+		Thread stateChangeTrackerThread = new Thread(stateChangeTracker);
+		stateChangeTrackerThread.start();
 		
 		jettyEmbedServer.join();
 	}

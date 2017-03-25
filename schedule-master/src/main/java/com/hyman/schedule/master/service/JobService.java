@@ -17,9 +17,12 @@ public interface JobService {
 	boolean isExist(String id);
 
 	void save(Job o);
+	
+	void save(List<Job> list);
 
 	void saveJobIfNotExist(Task t, Date scheduleTime);
 	
 	List<Job> findPreJob(String jobId);
 
+	List<Job> findAvailableWaitingJob(int maxtries,int limit);
 }

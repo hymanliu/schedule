@@ -29,6 +29,8 @@ public class JobServiceImpl implements JobService {
 	
 	@Override
 	public Page<Job> findPage(Job job, int offset,int limit){
+		
+		
 		//TODO
 		return null;
 	}
@@ -48,7 +50,7 @@ public class JobServiceImpl implements JobService {
 		return jobDao.find(jobId)!=null;
 	}
 	
-	private void save(List<JobRelation> list){
+	private void saveJobRelation(List<JobRelation> list){
 		JobRelation[] arr = list.toArray(new JobRelation[]{});
 		jobRelationDao.save(arr);
 	}
@@ -82,7 +84,7 @@ public class JobServiceImpl implements JobService {
 					Date date = new Date();
 					jobRelations.add(new JobRelation(jobId,preJobId,date,date));
 				}
-				this.save(jobRelations);
+				this.saveJobRelation(jobRelations);
 			}
 			
 		}
@@ -91,5 +93,16 @@ public class JobServiceImpl implements JobService {
 	@Override
 	public List<Job> findPreJob(String jobId) {
 		return jobDao.findPreJob(jobId);
+	}
+
+	@Override
+	public List<Job> findAvailableWaitingJob(int maxtries, int limit) {
+		return jobDao.findAvailableWaitingJob(maxtries, limit);
+	}
+
+	@Override
+	public void save(List<Job> list) {
+		Job[] entities = list.toArray(new Job[]{});
+		jobDao.save(entities);
 	}
 }

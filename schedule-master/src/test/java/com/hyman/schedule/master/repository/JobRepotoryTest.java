@@ -31,6 +31,7 @@ public class JobRepotoryTest extends DaoBaseJunitTest {
 		}
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Test
 	public void testFindWaitingPage(){
 		Page<Job> page = jobDao.findWaitingPage(1, 2);

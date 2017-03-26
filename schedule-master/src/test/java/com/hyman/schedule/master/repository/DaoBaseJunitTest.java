@@ -4,20 +4,18 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.SessionFactoryUtils;
 import org.springframework.orm.hibernate4.SessionHolder;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 
-@RunWith(SpringJUnit4ClassRunner.class) 
-@ContextConfiguration("classpath*:applicationContext.xml")
+import com.hyman.schedule.master.BaseJunitTest;
+
+//@RunWith(SpringJUnit4ClassRunner.class) 
+//@ContextConfiguration("classpath*:applicationContext.xml")
 @TransactionConfiguration(transactionManager="transactionManager" , defaultRollback=true)
-public class DaoBaseJunitTest  extends AbstractJUnit4SpringContextTests  {
+public class DaoBaseJunitTest  extends BaseJunitTest  {
 
     @Autowired
     protected SessionFactory sessionFactory;

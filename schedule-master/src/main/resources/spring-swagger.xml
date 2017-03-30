@@ -3,7 +3,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxrs="http://cxf.apache.org/jaxrs"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd">
     <bean id="swaggerConfig" class="io.swagger.jaxrs.config.BeanConfig">
-        <property name="resourcePackage" value="com.hyman.rpc"/>
+        <property name="resourcePackage" value="com.hyman.schedule.master.rpc"/>
         <property name="version" value="v1.0"/>
         <property name="basePath" value="${swagger.basePath}"/>
         <property name="title" value="RPC API"/>
@@ -12,14 +12,12 @@
         <property name="host" value="${swagger.host}"/>
         <property name="prettyPrint" value="${swagger.prettyprint}"/>
     </bean>
-    <bean id="apiListingResource" class="io.swagger.jaxrs.listing.ApiListingResource">
+    <bean id="apiListingResource" class="io.swagger.jaxrs.listing.ApiListingResource" />
 
-    </bean>
     <jaxrs:server id="doc" address="/doc">
         <jaxrs:serviceBeans>
-            <bean class="io.swagger.jaxrs.listing.ApiListingResource"/>
+            <ref bean="apiListingResource"/>
         </jaxrs:serviceBeans>
-
         <jaxrs:providers>
             <bean class="io.swagger.jaxrs.json.JacksonJsonProvider"/>
         </jaxrs:providers>

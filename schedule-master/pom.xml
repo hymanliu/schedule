@@ -1,16 +1,16 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-  	<groupId>com.hyman.schedule</groupId>
-  	<artifactId>schedule</artifactId>
-  	<version>1.0.0</version>
-  </parent>
-  <artifactId>schedule-master</artifactId>
-  <packaging>jar</packaging>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.hyman.schedule</groupId>
+		<artifactId>schedule</artifactId>
+		<version>1.0.0</version>
+	</parent>
+	<artifactId>schedule-master</artifactId>
+	<packaging>jar</packaging>
 
-  <name>schedule-master</name>
-  <url>http://maven.apache.org</url>
+	<name>schedule-master</name>
+	<url>http://maven.apache.org</url>
 
 	<dependencies>
 		<dependency>
@@ -18,102 +18,13 @@
 			<artifactId>schedule-common</artifactId>
 			<version>${schedule.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>joda-time</groupId>
-			<artifactId>joda-time</artifactId>
-			<version>${joda-time.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-mapper-asl</artifactId>
-			<version>${jackson.version}</version>
-		</dependency>
-
-		<!-- start spring config -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-web</artifactId>
-			<version>${spring.version}</version>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-webmvc</artifactId>
-			<version>${spring.version}</version>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
-			<version>${spring.version}</version>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
-		<!-- stop spring config -->
 
 		<dependency>
-			<groupId>javax.servlet.jsp</groupId>
-			<artifactId>jsp-api</artifactId>
-			<version>${jsp-api.version}</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
-			<version>${jstl.version}</version>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>taglibs</groupId>
-			<artifactId>standard</artifactId>
-			<version>1.1.2</version>
+			<groupId>com.hyman.schedule</groupId>
+			<artifactId>schedule-master-rpc</artifactId>
+			<version>${schedule.version}</version>
 		</dependency>
 
-		<!-- start jetty config -->
-		<dependency>
-			<groupId>org.eclipse.jetty</groupId>
-			<artifactId>jetty-servlets</artifactId>
-			<version>${jetty.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.jetty</groupId>
-			<artifactId>jetty-server</artifactId>
-			<version>${jetty.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.jetty</groupId>
-			<artifactId>jetty-webapp</artifactId>
-			<version>${jetty.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.jetty</groupId>
-			<artifactId>jetty-jsp</artifactId>
-			<version>${jetty.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>${mysql.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>druid</artifactId>
-			<version>${druid.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>commons-fileupload</groupId>
-			<artifactId>commons-fileupload</artifactId>
-			<version>${commons.fileupload.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-			<version>${commons.io.version}</version>
-		</dependency>
-		
 		<!-- hibernate -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -140,77 +51,13 @@
 			<artifactId>dao</artifactId>
 			<version>${genericdao.version}</version>
 		</dependency>
-
 		<dependency>
 			<groupId>com.googlecode.genericdao</groupId>
 			<artifactId>search-hibernate</artifactId>
 			<version>${genericdao.version}</version>
 		</dependency>
-		
-		<!-- cxf  begin-->
-		<dependency>
-			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-rt-frontend-jaxrs</artifactId>
-			<version>${cxf.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-rt-rs-extension-search</artifactId>
-			<version>${cxf.version}</version>
-		</dependency>
-		<dependency>
-		  <groupId>org.apache.cxf</groupId>
-		  <artifactId>cxf-rt-rs-service-description</artifactId>
-		  <version>${cxf.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-rt-rs-client</artifactId>
-			<version>${cxf.version}</version>
-		</dependency>
-		
-		<dependency>
-           <groupId>org.codehaus.jackson</groupId>
-           <artifactId>jackson-jaxrs</artifactId>
-           <version>${jackson.version}</version>
-       </dependency>
-       <dependency>
-           <groupId>org.codehaus.jackson</groupId>
-           <artifactId>jackson-xc</artifactId>
-           <version>${jackson.version}</version>
-       </dependency>
-       <!-- cxf  end-->
-       
-       <dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-			<version>2.4.2</version>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.jaxrs</groupId>
-			<artifactId>jackson-jaxrs-json-provider</artifactId>
-			<version>2.4.2</version>
-		</dependency>
-       
-        <dependency>
- 			<groupId>io.swagger</groupId>
- 			<artifactId>swagger-annotations</artifactId>
- 			<version>1.5.0</version>
-		</dependency>
-		<dependency>
-			<groupId>io.swagger</groupId>
-			<artifactId>swagger-jaxrs</artifactId>
-			<version>1.5.0</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>validation-api</artifactId>
-					<groupId>javax.validation</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-       
 	</dependencies>
-	
+
 	<build>
 		<finalName>${project.artifactId}-${version}</finalName>
 		<sourceDirectory>${basedir}/src/main/java</sourceDirectory>
@@ -285,7 +132,7 @@
 						<manifest>
 							<addClasspath>true</addClasspath>
 							<!-- 程序启动入口 -->
-							<mainClass>com.hyman.schedule.master.Application</mainClass>
+							<mainClass>com.hyman.schedule.master.ScheduleMaster</mainClass>
 							<classpathPrefix>lib/</classpathPrefix>
 						</manifest>
 					</archive>

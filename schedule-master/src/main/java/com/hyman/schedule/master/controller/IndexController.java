@@ -1,6 +1,11 @@
 package com.hyman.schedule.master.controller;
 
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -29,6 +34,18 @@ public class IndexController {
 		} else {
 			model.addAttribute("uname", testService.hellworld());
 		}
+		
+		List<Map<String,String>> list = new ArrayList<>();
+		
+		for(int i=0;i<5;i++){
+			Map<String,String> m = new HashMap<>();
+			m.put("name", "name"+i);
+			m.put("age", i+"");
+			list.add(m);
+		}
+		
+		request.setAttribute("list", list);
+		//model.addAttribute("list", list);
 		
 		LOG.info("--you call spring mvc /index");
 	}

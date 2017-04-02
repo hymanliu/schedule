@@ -30,7 +30,7 @@
 
 	<!-- jettyEmbedServer config -->
 	<bean id="jettyEmbedServer" class="com.hyman.schedule.master.JettyEmbedServer">
-		<property name="port" value="${jetty.port}"/>
+		<property name="port" value="${master.jetty.port}"/>
 	</bean>
 	
 	<import resource="classpath*:hibernate.cfg.xml"/>

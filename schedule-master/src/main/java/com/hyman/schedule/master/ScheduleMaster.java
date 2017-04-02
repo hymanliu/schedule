@@ -6,7 +6,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.hyman.schedule.master.tracker.JobCreateTracker;
 import com.hyman.schedule.master.tracker.StateChangeTracker;
 
-public class Application {
+public class ScheduleMaster {
 	
 	public static void main(String[] args) throws Exception {
 		@SuppressWarnings("resource")

@@ -93,7 +93,7 @@
     
     <servlet-mapping>
         <servlet-name>cxfServlet</servlet-name>
-        <url-pattern>/rpc/*</url-pattern>
+        <url-pattern>/master-rpc/*</url-pattern>
     </servlet-mapping>
     
 	<!-- Session有效时间(s) -->

@@ -1,4 +1,4 @@
-package com.hyman.schedule.master.rpc.impl;
+package com.hyman.schedule.master.rpc;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

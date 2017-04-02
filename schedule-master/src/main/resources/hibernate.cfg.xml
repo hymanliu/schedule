@@ -29,7 +29,6 @@
 	    <property name="dataSource" ref="dataSource"/>
 		<property name="annotatedClasses">
 			<list>
-				<value>com.hyman.schedule.master.entity.Project</value>
 				<value>com.hyman.schedule.master.entity.Task</value>
 				<value>com.hyman.schedule.master.entity.Job</value>
 				<value>com.hyman.schedule.master.entity.TaskRelation</value>

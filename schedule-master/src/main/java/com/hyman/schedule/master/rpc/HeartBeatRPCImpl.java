@@ -1,4 +1,4 @@
-package com.hyman.schedule.master.rpc.impl;
+package com.hyman.schedule.master.rpc;
 
 import org.springframework.stereotype.Component;
 

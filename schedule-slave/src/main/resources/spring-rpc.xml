@@ -16,7 +16,7 @@
    
   	<bean id="jsonProvider" class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider" /> 
 	
-	<jaxrs:server id="helloRPC" address="/api">
+	<!-- <jaxrs:server id="helloRPC" address="/api">
 	     <jaxrs:features>
 	         <core:logging/>
 	     </jaxrs:features>
@@ -28,9 +28,7 @@
 	    	<ref bean="jsonProvider"/> 
 	    </jaxrs:providers>
 	    <jaxrs:inInterceptors>
-	    	 <bean class="com.hyman.schedule.master.interceptor.AuthInterceptor" />
 	    </jaxrs:inInterceptors>
-	    
-	</jaxrs:server>
+	</jaxrs:server> -->
 	
 </beans>  

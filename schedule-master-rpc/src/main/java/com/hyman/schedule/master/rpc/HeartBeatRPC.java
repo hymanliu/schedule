@@ -7,6 +7,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
+import com.hyman.schedule.common.bean.Response;
+import com.hyman.schedule.common.bean.SlaveInfo;
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -18,7 +21,7 @@ public interface HeartBeatRPC{
 	@Path("/isAlive")
     @GET
     @Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
-	@ApiOperation(value="isAlive",tags = {"HeartBeatRPC.isAlive"})
-	boolean isAlive(@ApiParam @QueryParam("name")String name);
+	@ApiOperation(value="doBeat",tags = {"HeartBeatRPC.doBeat"})
+	Response<SlaveInfo> doBeat(@ApiParam @QueryParam("hostname")String hostname,@ApiParam @QueryParam("port") Integer port);
     
 }

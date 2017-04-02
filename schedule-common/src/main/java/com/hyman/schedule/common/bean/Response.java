@@ -1,10 +1,15 @@
 package com.hyman.schedule.common.bean;
 
-public class Response<T> {
+import java.io.Serializable;
+
+public class Response<T> implements Serializable {
+	
+	private static final long serialVersionUID = 9028163396962707842L;
 	private boolean success;
 	private String msg;
 	private T data;
 	
+	public Response(){}
 	public Response(boolean success,String msg){
 		this.success = success;
 		this.msg = msg;
@@ -13,6 +18,14 @@ public class Response<T> {
 		this.success = success;
 		this.msg = msg;
 		this.data = data;
+	}
+	
+	public static<T> Response<T> ok(T o){
+		return new Response<T>(true,"OK",o);
+	}
+	
+	public static<T> Response<T> error(String msg){
+		return new Response<T>(false,msg);
 	}
 	
 	public boolean isSuccess() {

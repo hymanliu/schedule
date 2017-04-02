@@ -14,7 +14,7 @@
     </bean>
     <bean id="apiListingResource" class="io.swagger.jaxrs.listing.ApiListingResource" />
 
-    <jaxrs:server id="doc" address="/doc">
+    <jaxrs:server id="apidoc" address="/apidoc">
         <jaxrs:serviceBeans>
             <ref bean="apiListingResource"/>
         </jaxrs:serviceBeans>

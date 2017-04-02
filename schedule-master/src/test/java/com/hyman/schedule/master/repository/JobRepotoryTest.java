@@ -5,7 +5,6 @@ import java.util.List;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.hyman.schedule.common.bean.Page;
 import com.hyman.schedule.common.enums.JobState;
 import com.hyman.schedule.master.entity.Job;
 
@@ -31,16 +30,6 @@ public class JobRepotoryTest extends DaoBaseJunitTest {
 		}
 	}
 	
-	@SuppressWarnings("deprecation")
-	@Test
-	public void testFindWaitingPage(){
-		Page<Job> page = jobDao.findWaitingPage(1, 2);
-		
-		for(Job j : page.getItems()){
-			
-			System.out.println(j.getId());
-		}
-	}
 	
 	@Test
 	public void testFindAvailableWaitingJob(){

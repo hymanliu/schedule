@@ -3,7 +3,7 @@ package com.hyman.schedule.master.repository;
 import java.util.List;
 
 import com.googlecode.genericdao.dao.hibernate.GenericDAO;
-import com.hyman.schedule.common.bean.Page;
+import com.hyman.schedule.common.enums.JobState;
 import com.hyman.schedule.master.entity.Job;
 
 public interface JobDao extends GenericDAO<Job, String>{
@@ -14,9 +14,6 @@ public interface JobDao extends GenericDAO<Job, String>{
 	 * @return
 	 */
 	List<Job> findPreJob(String jobId);
-
-	@Deprecated
-	Page<Job> findWaitingPage(int offset, int limit);
 
 	/**
 	 * 查询可以加入就绪队列的
@@ -34,4 +31,7 @@ public interface JobDao extends GenericDAO<Job, String>{
 	 */
 	List<Job> findOverTimeJob(int maxMin, int limit);
 
+	List<Job> listJob(int limit,JobState... states);
+
+	
 }

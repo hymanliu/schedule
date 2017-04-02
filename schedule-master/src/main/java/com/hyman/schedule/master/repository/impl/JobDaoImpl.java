@@ -25,7 +25,6 @@ public class JobDaoImpl extends BaseDaoImpl<Job, String> implements JobDao {
 		return query.list();
 	}
 	
-	@Override
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public Page<Job> findWaitingPage(int offset, int limit){
 		StringBuffer whereCondition = new StringBuffer(" WHERE t.state=:initState or (t.state=:failedState and t.tries<4)");
@@ -82,5 +81,26 @@ public class JobDaoImpl extends BaseDaoImpl<Job, String> implements JobDao {
 		return query.list();
 	}
 
-	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Job> listJob(int limit,JobState... states){
+		StringBuffer sb = new StringBuffer("SELECT * FROM t_job t WHERE 1=1");
+		if(states!=null){
+			if(states.length>1){
+				sb.append(" and (");
+				for(JobState state: states){
+					sb.append(" t.state='").append(state).append("' or");
+				}
+				sb.delete(sb.length()-3, sb.length());
+				sb.append(")");
+			}
+			else{
+				sb.append(" and t.state='").append(states[0]).append("'");
+			}
+		}
+		Query query = this.getSession().createSQLQuery(sb.toString())
+				.addEntity(Job.class)
+				.setMaxResults(limit);
+		return query.list();
+	}
 }

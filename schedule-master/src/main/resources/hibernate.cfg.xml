@@ -38,8 +38,8 @@
 	    <property name="hibernateProperties">
 	      <value>
 	        hibernate.dialect=org.hibernate.dialect.MySQLDialect
-	        hibernate.show_sql=true
-	        hibernate.format_sql=true
+	        hibernate.show_sql=false
+	        hibernate.format_sql=false
 	        hibernate.hbm2ddl.auto=update
 	      </value>
 	    </property>

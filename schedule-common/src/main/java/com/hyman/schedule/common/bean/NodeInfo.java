@@ -2,15 +2,15 @@ package com.hyman.schedule.common.bean;
 
 import java.io.Serializable;
 
-public class SlaveInfo implements Serializable {
+public class NodeInfo implements Serializable {
 
 	private static final long serialVersionUID = 3252808212252842945L;
 	private String hostname;
 	private int port;
 	
-	public SlaveInfo(){}
+	public NodeInfo(){}
 	
-	public SlaveInfo(String hostname, int port) {
+	public NodeInfo(String hostname, int port) {
 		this.hostname = hostname;
 		this.port = port;
 	}

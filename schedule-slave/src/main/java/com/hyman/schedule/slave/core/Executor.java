@@ -1,4 +1,4 @@
-package com.hyman.schedule.slave;
+package com.hyman.schedule.slave.core;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

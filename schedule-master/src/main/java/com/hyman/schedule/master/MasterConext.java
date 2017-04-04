@@ -6,7 +6,9 @@ import com.hyman.schedule.master.entity.Job;
 
 public class MasterConext {
 
-	private MasterConext(){}
+	private MasterConext(){
+		this.queue = new ConcurrentLinkedQueue<Job>();
+	}
 	
 	private ConcurrentLinkedQueue<Job> queue;
 	
@@ -20,4 +22,5 @@ public class MasterConext {
 		}
 		return instance;
 	}
+	
 }

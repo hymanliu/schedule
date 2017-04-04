@@ -11,7 +11,7 @@ import com.hyman.schedule.common.bean.NodeInfo;
 import com.hyman.schedule.master.entity.Job;
 
 @Service
-public class MasterConext {
+public class MasterContext {
 	
 	private ConcurrentLinkedQueue<Job> jobQueue;
 	private Map<NodeInfo,Long> slaveMap;
@@ -22,7 +22,7 @@ public class MasterConext {
 	@Value("#{configProperties['master.port']}")
 	private String masterPort;
 
-	public MasterConext(){
+	public MasterContext(){
 		this.jobQueue = new ConcurrentLinkedQueue<Job>();
 		this.slaveMap = new HashMap<>();
 	}
@@ -34,16 +34,20 @@ public class MasterConext {
 		return false;
 	}
 	
+	public boolean isQueueEmpty(){
+		return jobQueue.isEmpty();
+	}
+	
 	public Job poll(){
 		return jobQueue.poll();
 	}
-
+	
 	public Map<NodeInfo, Long> getSlaveMap() {
 		return slaveMap;
 	}
 
 	public NodeInfo getActiveMaster() {
-		synchronized(MasterConext.class){
+		synchronized(MasterContext.class){
 			if(activeMaster==null){
 				activeMaster = new NodeInfo(masterHost,Integer.parseInt(masterPort));
 			}

@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.hyman.schedule.common.bean.Page;
+import com.hyman.schedule.common.enums.JobState;
 import com.hyman.schedule.master.entity.Job;
 import com.hyman.schedule.master.entity.Task;
 
@@ -33,5 +34,7 @@ public interface JobService {
 	 * @return
 	 */
 	List<Job> findOverTimeJob(int maxMin, int limit);
+	
+	List<Job> listJob(int limit,JobState... states);
 	
 }

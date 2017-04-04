@@ -4,6 +4,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.hyman.schedule.master.core.JobCreateTracker;
+import com.hyman.schedule.master.core.MasterContextTracker;
 import com.hyman.schedule.master.core.StateChangeTracker;
 
 public class ScheduleMaster {
@@ -22,6 +23,10 @@ public class ScheduleMaster {
 		StateChangeTracker stateChangeTracker =  (StateChangeTracker)context.getBean("stateChangeTracker");
 		Thread stateChangeTrackerThread = new Thread(stateChangeTracker);
 		stateChangeTrackerThread.start();
+		
+		MasterContextTracker masterContextTracker =  (MasterContextTracker)context.getBean("masterContextTracker");
+		Thread masterContextTrackerThread = new Thread(masterContextTracker);
+		masterContextTrackerThread.start();
 		
 		jettyEmbedServer.join();
 	}

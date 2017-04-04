@@ -16,19 +16,18 @@
    
   	<bean id="jsonProvider" class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider" /> 
 	
-	<!-- <jaxrs:server id="helloRPC" address="/api">
+	<jaxrs:server id="slaveRPC" address="/api">
 	     <jaxrs:features>
 	         <core:logging/>
 	     </jaxrs:features>
 	     <jaxrs:serviceBeans>
-	     	<ref bean="heartBeatRPCImpl" />
-	     	<ref bean="helloRPCImpl" />
+	     	<ref bean="jobClientRPCImpl" />
 	    </jaxrs:serviceBeans>
 	    <jaxrs:providers>
 	    	<ref bean="jsonProvider"/> 
 	    </jaxrs:providers>
 	    <jaxrs:inInterceptors>
 	    </jaxrs:inInterceptors>
-	</jaxrs:server> -->
+	</jaxrs:server>
 	
 </beans>  

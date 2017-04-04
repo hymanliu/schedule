@@ -113,4 +113,9 @@ public class JobServiceImpl implements JobService {
 	public List<Job> findOverTimeJob(int maxMin,int limit){
 		return jobDao.findOverTimeJob(maxMin, limit);
 	}
+	
+	@Override
+	public List<Job> listJob(int limit,JobState... states){
+		return jobDao.listJob(limit, states);
+	}
 }

@@ -9,13 +9,13 @@ import com.hyman.schedule.common.bean.ClusterInfo;
 import com.hyman.schedule.common.bean.Response;
 import com.hyman.schedule.common.bean.NodeInfo;
 import com.hyman.schedule.common.config.ConfigurationContext;
-import com.hyman.schedule.master.core.MasterConext;
+import com.hyman.schedule.master.core.MasterContext;
 import com.hyman.schedule.master.rpc.HeartBeatRPC;
 
 @Component("heartBeatRPCImpl")
 public class HeartBeatRPCImpl implements HeartBeatRPC {
 	
-	@Resource MasterConext masterConext;
+	@Resource MasterContext masterConext;
 	@Override
 	public Response<ClusterInfo> doBeat(String hostname,Integer port) {
 		

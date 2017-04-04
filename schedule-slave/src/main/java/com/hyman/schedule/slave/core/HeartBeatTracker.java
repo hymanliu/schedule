@@ -19,7 +19,7 @@ public class HeartBeatTracker implements Runnable {
 	@Autowired SlaveContext slaveContext;
 	
 	private boolean isActive = true;
-	static final long  HEART_BEAT_DURATION=5*1000L;
+	static final long  HEART_BEAT_DURATION=120*1000L;
 	static final Logger LOG = LoggerFactory.getLogger(HeartBeatTracker.class);
 	
 	@Override

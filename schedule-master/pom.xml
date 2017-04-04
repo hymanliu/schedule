@@ -24,6 +24,12 @@
 			<artifactId>schedule-master-rpc</artifactId>
 			<version>${schedule.version}</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>com.hyman.schedule</groupId>
+			<artifactId>schedule-slave-rpc</artifactId>
+			<version>${schedule.version}</version>
+		</dependency>
 
 		<!-- hibernate -->
 		<dependency>

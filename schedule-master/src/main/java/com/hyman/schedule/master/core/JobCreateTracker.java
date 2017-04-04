@@ -1,4 +1,4 @@
-package com.hyman.schedule.master.tracker;
+package com.hyman.schedule.master.core;
 
 import java.util.Calendar;
 import java.util.Date;

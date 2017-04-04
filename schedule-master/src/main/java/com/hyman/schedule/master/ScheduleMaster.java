@@ -3,8 +3,8 @@ package com.hyman.schedule.master;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.hyman.schedule.master.tracker.JobCreateTracker;
-import com.hyman.schedule.master.tracker.StateChangeTracker;
+import com.hyman.schedule.master.core.JobCreateTracker;
+import com.hyman.schedule.master.core.StateChangeTracker;
 
 public class ScheduleMaster {
 	

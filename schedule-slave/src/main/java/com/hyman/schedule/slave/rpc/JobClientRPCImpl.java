@@ -11,7 +11,8 @@ public class JobClientRPCImpl implements JobClientRPC {
 	public boolean distribute(JobInfo jobInfo) {
 		
 		System.out.println(jobInfo);
-		return false;
+		
+		return true;
 	}
 
 }

@@ -16,13 +16,13 @@
    
   	<bean id="jsonProvider" class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider" /> 
 	
-	<jaxrs:server id="helloRPC" address="/api">
+	<jaxrs:server id="masterRPC" address="/api">
 	     <jaxrs:features>
 	         <core:logging/>
 	     </jaxrs:features>
 	     <jaxrs:serviceBeans>
 	     	<ref bean="heartBeatRPCImpl" />
-	     	<ref bean="helloRPCImpl" />
+	     	<ref bean="masterClientRPCImpl" />
 	    </jaxrs:serviceBeans>
 	    <jaxrs:providers>
 	    	<ref bean="jsonProvider"/> 

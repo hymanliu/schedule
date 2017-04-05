@@ -18,7 +18,7 @@ public class StateChangeTracker implements Runnable {
 	static final Logger LOG = LoggerFactory.getLogger(StateChangeTracker.class);
 	static final int BATCH_SIZE=10;
 	static final int MAX_TRIES=3;
-	static final int MAX_OVERTIME_MIN=60;
+	static final int MAX_OVERTIME_MINUTE=60;
 	
 	@Autowired JobService jobService;
 	
@@ -34,7 +34,7 @@ public class StateChangeTracker implements Runnable {
 				}
 				jobService.save(waitingJobs);
 				
-				List<Job> overtimeJobs = jobService.findOverTimeJob(MAX_OVERTIME_MIN, BATCH_SIZE);
+				List<Job> overtimeJobs = jobService.findOverTimeJob(MAX_OVERTIME_MINUTE, BATCH_SIZE);
 				for(Job job : overtimeJobs){
 					
 					//TODO Call the api to kill the Job process.
@@ -42,13 +42,11 @@ public class StateChangeTracker implements Runnable {
 					
 					job.setState(JobState.FAILED);
 					job.setEndTime(new Date());
-					int tries = job.getTries() == null?1:(job.getTries()+1);
-					job.setTries(tries);
 				}
 				jobService.save(overtimeJobs);
 				
 				if(waitingJobs.size() < BATCH_SIZE){
-					Thread.sleep(5000);
+					Thread.sleep(10000);
 				}
 			}
 			catch(Exception e){

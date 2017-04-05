@@ -19,6 +19,7 @@ public class Executor extends Thread {
 	
 	private JobInfo jobInfo;
 	
+	
 	public Executor(JobInfo jobInfo) {
 		super();
 		this.jobInfo = jobInfo;
@@ -71,4 +72,17 @@ public class Executor extends Thread {
 		String[] cmd = list.toArray(new String[]{});
 		return cmd;
 	}
+
+	@Override
+	public void run() {
+		int exitCode = this.exec();
+		if(exitCode==0){
+			//TODO 运行成功
+		}
+		else{
+			//TODO 运行失败
+		}
+		
+	}
+	
 }

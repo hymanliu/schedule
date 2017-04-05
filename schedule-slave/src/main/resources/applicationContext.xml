@@ -32,7 +32,6 @@
 	</bean>
 	
 	<import resource="classpath*:spring-rpc.xml"/>
-	<import resource="classpath*:master-rpc-api.xml"/>
 	<import resource="classpath*:spring-swagger.xml"/> 
 	
 </beans>

@@ -1,7 +1,5 @@
 package com.hyman.schedule.master.rpc;
 
-import javax.annotation.Resource;
-
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +13,7 @@ import com.hyman.schedule.master.rpc.HeartBeatRPC;
 @Component("heartBeatRPCImpl")
 public class HeartBeatRPCImpl implements HeartBeatRPC {
 	
-	@Resource MasterContext masterConext;
+	MasterContext masterConext = MasterContext.getInstance();
 	@Override
 	public Response<ClusterInfo> doBeat(String hostname,Integer port) {
 		
@@ -28,7 +26,7 @@ public class HeartBeatRPCImpl implements HeartBeatRPC {
 			
 			if(isLegal(hostname, port)){
 				NodeInfo slave = new NodeInfo(hostname,port);
-				masterConext.getSlaveMap().put(slave, System.currentTimeMillis());
+				masterConext.putIntoSlaveMap(slave);
 				clusterInfo.setActiveMater(masterConext.getActiveMaster());
 				return Response.ok(clusterInfo);
 			}

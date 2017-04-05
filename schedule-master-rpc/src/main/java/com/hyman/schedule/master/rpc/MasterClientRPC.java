@@ -11,14 +11,14 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
-@Path("/hello")
-@Api(value="HelloRPC", tags = {"HelloRPC"})
-public interface HelloRPC{
+@Path("/masterclient")
+@Api(value="MasterClientRPC", tags = {"MasterClientRPC"})
+public interface MasterClientRPC{
 	
 	@Path("/say")
     @GET
     @Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
-	@ApiOperation(value="say",tags = {"HelloRPC.say"})
+	@ApiOperation(value="say",tags = {"MasterClientRPC.say"})
 	String say(@ApiParam @QueryParam("name")String name);
     
 }

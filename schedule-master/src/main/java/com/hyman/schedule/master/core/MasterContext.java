@@ -1,30 +1,37 @@
 package com.hyman.schedule.master.core;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
-
 import com.hyman.schedule.common.bean.NodeInfo;
+import com.hyman.schedule.common.config.ConfigurationContext;
 import com.hyman.schedule.master.entity.Job;
 
-@Service
 public class MasterContext {
 	
 	private ConcurrentLinkedQueue<Job> jobQueue;
 	private Map<NodeInfo,Long> slaveMap;
 	private NodeInfo activeMaster;
-	
-	@Value("#{configProperties['master.host']}")
 	private String masterHost;
-	@Value("#{configProperties['master.port']}")
 	private String masterPort;
+	
+	private static MasterContext instance;
 
-	public MasterContext(){
+	private MasterContext(){
 		this.jobQueue = new ConcurrentLinkedQueue<Job>();
-		this.slaveMap = new HashMap<>();
+		this.slaveMap = new ConcurrentHashMap<>();
+		masterHost = ConfigurationContext.getValue("master.host");
+		masterPort = ConfigurationContext.getValue("master.port");
+	}
+	
+	public static MasterContext getInstance(){
+		synchronized(MasterContext.class){
+			if(instance==null){
+				instance = new MasterContext();
+			}
+		}
+		return instance;
 	}
 	
 	public boolean push(Job o){
@@ -44,6 +51,10 @@ public class MasterContext {
 	
 	public Map<NodeInfo, Long> getSlaveMap() {
 		return slaveMap;
+	}
+	
+	public Long putIntoSlaveMap(NodeInfo nodeInfo){
+		return slaveMap.put(nodeInfo, System.currentTimeMillis());
 	}
 
 	public NodeInfo getActiveMaster() {

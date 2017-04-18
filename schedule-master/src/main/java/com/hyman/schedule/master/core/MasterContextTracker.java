@@ -11,6 +11,7 @@ import javax.annotation.Resource;
 import org.apache.cxf.jaxrs.client.JAXRSClientFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
@@ -23,16 +24,16 @@ import com.hyman.schedule.master.service.JobService;
 import com.hyman.schedule.master.service.TaskService;
 import com.hyman.schedule.slave.rpc.JobClientRPC;
 
-@Component("masterContextTracker")
+@Component
 public class MasterContextTracker implements Runnable {
 
 	static final Logger LOG = LoggerFactory.getLogger(MasterContextTracker.class);
 	static final long LOAD_READY_JOB_DURATION = 20*1000L;
 	@Resource TaskService taskService;
 	@Resource JobService jobService;
+	@Autowired MasterContext masterContext;
 	
 	private long lastestLoadTime = 0L;
-	private MasterContext masterContext = MasterContext.getInstance();
 	private boolean isActive = true;
 	
 	@Override

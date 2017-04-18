@@ -12,7 +12,7 @@ import com.hyman.schedule.common.enums.JobState;
 import com.hyman.schedule.master.entity.Job;
 import com.hyman.schedule.master.service.JobService;
 
-@Component("stateChangeTracker")
+@Component
 public class StateChangeTracker implements Runnable {
 
 	static final Logger LOG = LoggerFactory.getLogger(StateChangeTracker.class);

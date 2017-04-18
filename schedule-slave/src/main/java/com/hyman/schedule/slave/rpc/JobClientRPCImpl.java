@@ -12,7 +12,7 @@ public class JobClientRPCImpl implements JobClientRPC {
 		
 		System.out.println(jobInfo);
 		
-		return true;
+		return false;
 	}
 
 }

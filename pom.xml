@@ -32,9 +32,10 @@
 		<druid.version>1.0.20</druid.version>
 		<commons.io.version>2.0.1</commons.io.version>
 		<commons.fileupload.version>1.2.2</commons.fileupload.version>
-		<zookeeper.version>3.4.6</zookeeper.version>
 		<cxf.version>3.0.2</cxf.version>
 		<jackson.version>1.8.1</jackson.version>
+		<zookeeper.version>3.4.6</zookeeper.version>
+		<zkclient.version>0.7</zkclient.version>
 	</properties>
 
 	<dependencies>

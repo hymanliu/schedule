@@ -9,7 +9,7 @@
         <property name="title" value="Schedule slave RPC"/>
         <property name="description" value="Schedule slave RPC API"/>
         <property name="scan" value="true"/>
-        <property name="host" value="${slave.swagger.hostport}"/>
+        <property name="host" value="${slave.swagger.address}"/>
         <property name="prettyPrint" value="true"/>
     </bean>
     <bean id="apiListingResource" class="io.swagger.jaxrs.listing.ApiListingResource" />

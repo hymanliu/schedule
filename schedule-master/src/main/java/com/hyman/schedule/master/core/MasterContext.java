@@ -5,24 +5,20 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 import com.hyman.schedule.common.bean.NodeInfo;
-import com.hyman.schedule.common.config.ConfigurationContext;
+import com.hyman.schedule.common.bean.ServerInfo;
 import com.hyman.schedule.master.entity.Job;
 
 public class MasterContext {
 	
 	private ConcurrentLinkedQueue<Job> jobQueue;
 	private Map<NodeInfo,Long> slaveMap;
-	private NodeInfo activeMaster;
-	private String masterHost;
-	private String masterPort;
+	private ServerInfo activeMaster;
 	
 	private static MasterContext instance;
 
 	private MasterContext(){
 		this.jobQueue = new ConcurrentLinkedQueue<Job>();
 		this.slaveMap = new ConcurrentHashMap<>();
-		masterHost = ConfigurationContext.getValue("master.host");
-		masterPort = ConfigurationContext.getValue("master.port");
 	}
 	
 	public static MasterContext getInstance(){
@@ -57,13 +53,11 @@ public class MasterContext {
 		return slaveMap.put(nodeInfo, System.currentTimeMillis());
 	}
 
-	public NodeInfo getActiveMaster() {
-		synchronized(MasterContext.class){
-			if(activeMaster==null){
-				activeMaster = new NodeInfo(masterHost,Integer.parseInt(masterPort));
-			}
-		}
+	public ServerInfo getActiveMaster() {
 		return activeMaster;
+	}
+	public void setActiveMaster(ServerInfo activeMaster) {
+		this.activeMaster = activeMaster;
 	}
 	
 }

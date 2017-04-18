@@ -16,7 +16,7 @@ import com.hyman.schedule.master.entity.Task;
 import com.hyman.schedule.master.service.JobService;
 import com.hyman.schedule.master.service.TaskService;
 
-@Component("jobCreateTracker")
+@Component
 public class JobCreateTracker implements Runnable {
 
 	static final Logger LOG = LoggerFactory.getLogger(JobCreateTracker.class);

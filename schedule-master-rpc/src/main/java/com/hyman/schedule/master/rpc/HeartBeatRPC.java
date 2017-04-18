@@ -8,7 +8,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import com.hyman.schedule.common.bean.Response;
-import com.hyman.schedule.common.bean.ClusterInfo;
+import com.hyman.schedule.common.bean.ServerInfo;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -22,6 +22,6 @@ public interface HeartBeatRPC{
     @GET
     @Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
 	@ApiOperation(value="doBeat",tags = {"HeartBeatRPC.doBeat"})
-	Response<ClusterInfo> doBeat(@ApiParam @QueryParam("hostname")String hostname,@ApiParam @QueryParam("port") Integer port);
+	Response<ServerInfo> doBeat(@ApiParam @QueryParam("hostname")String hostname,@ApiParam @QueryParam("port") Integer port);
     
 }

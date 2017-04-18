@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 
 import com.hyman.schedule.common.jdbc.Connector;
 import com.hyman.schedule.common.jdbc.MysqlConnector;
+import com.hyman.schedule.common.util.CryptTool;
 import com.hyman.schedule.common.util.DateUtil;
 import com.hyman.schedule.common.util.PropertiesUtil;
 
@@ -30,18 +31,20 @@ public class ConfigurationContext implements Runnable {
 	private String url;
 	private String username;
 	private String password;
-	private String project;
+	private String artifact;
+	private String group;
 	
 	private ConfigurationContext(){
 		props = PropertiesUtil.loadByPrefixName(CONF_FILE_PREFIX);
 		this.url=props.getProperty("config.jdbc.url","").trim();
 		this.username=props.getProperty("config.jdbc.username","").trim();
 		this.password=props.getProperty("config.jdbc.password","").trim();
-		this.project=props.getProperty("config.project","").trim();
+		this.group=props.getProperty("config.group","").trim();
+		this.artifact=props.getProperty("config.artifact","").trim();
 		
 		if(StringUtils.isBlank(this.url) || 
 				StringUtils.isBlank(this.username) ||
-				StringUtils.isBlank(this.project)){
+				StringUtils.isBlank(this.artifact)){
 			LOG.warn("not load the database configurations");
 		}else{
 			loadConfig(null);
@@ -64,16 +67,19 @@ public class ConfigurationContext implements Runnable {
 		Connector connector = null;
 		
 		try{
-			LOG.info("config.jdbc.url is: {}",url);
-			LOG.info("config.jdbc.username is: {}",username);
-			LOG.info("config.jdbc.password is: {}",password);
-			connector = new MysqlConnector(url, username, password);
+			connector = new MysqlConnector(url, username, decryptPassword());
 		}
 		catch(Exception e){
 			throw new RuntimeException("can't connect the config database server :",e);
 		}
 		String updateTimeCondition = date == null ? "" :" and modify_time >='"+ DateUtil.format(date, "yyyy-MM-dd HH:mm:ss")+"'";
-		String projectCondition = StringUtils.isBlank(project) ? "" : " and project='"+project+"'";
+		String projectCondition = "";
+        if(StringUtils.isBlank(artifact)){
+            projectCondition = " and project='"+group+"'";
+        }
+        else{
+            projectCondition = " and (project='"+group+"'" +" or project='"+artifact+"')" ;
+        }
 		String sql ="select prop_key,prop_value from "+TABLE_NAME+" where flag=1"+updateTimeCondition + projectCondition;
 		
 		Connection conn = null;
@@ -117,6 +123,18 @@ public class ConfigurationContext implements Runnable {
 		}
 	}
 	
+	private String decryptPassword() {
+		String realPasswd = password;
+		if(StringUtils.isNotBlank(this.password)){
+			try{
+				realPasswd = CryptTool.decryptAES(password);
+			}catch(Exception e){
+				LOG.warn("The password \"{}\" is not using the SecurityTool encrypted.",password);
+			}
+		}
+		return realPasswd;
+	}
+	
 	public static Properties getProps(){
 		return getInstance().props;
 	}
@@ -135,7 +153,7 @@ public class ConfigurationContext implements Runnable {
 			try{
 				long duration = Long.parseLong(getValue("config.refresh.interval", "300000"));
 				Thread.sleep(duration);
-				LOG.info("load the configurations for {} .", project);
+				LOG.info("load the configurations for {} .", artifact);
 				//加载十分钟之前修改的配置文件
 				loadConfig(new Date(System.currentTimeMillis()-duration*2));
 			}

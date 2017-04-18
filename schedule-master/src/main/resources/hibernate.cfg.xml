@@ -9,7 +9,7 @@
  
     <bean name="driver" class="com.mysql.jdbc.Driver" />
 	<!-- 配置数据库连接池druid -->
-	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+	<bean id="dataSource" class="com.hyman.schedule.common.jdbc.DruidCryptDataSource" init-method="init" destroy-method="close">
 		<!-- 基本属性 driver、url、user、password -->
 		<property name="driver" ref="driver" />
 		<property name="url" value="${config.jdbc.url}" />

@@ -18,19 +18,13 @@
    </context:component-scan>
    <context:annotation-config/>
 
-	<!-- 引用*.properites配置文件 -->
-    <context:property-placeholder location="classpath*:config.properties" />
 	<!-- properties属性注入 -->
 	<bean id="configProperties" class="com.hyman.schedule.common.config.ConfigurationFactoryBean" />
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">
         <property name="properties" ref="configProperties" />
     </bean> 
-	
-
-	<!-- jettyEmbedServer config -->
-	<bean id="jettyEmbedServer" class="com.hyman.schedule.master.JettyEmbedServer">
-		<property name="port" value="${master.port}"/>
-	</bean>
+	<bean id="jettyDaemon" class="com.hyman.schedule.master.core.JettyDaemon" init-method="start"/>
+	<bean id="masterContext" class="com.hyman.schedule.master.core.MasterContext" factory-method="getInstance"/>
 	
 	<import resource="classpath*:hibernate.cfg.xml"/>
 	<import resource="classpath*:spring-rpc.xml"/>

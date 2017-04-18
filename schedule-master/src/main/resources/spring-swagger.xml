@@ -9,7 +9,7 @@
         <property name="title" value="Shedule master RPC"/>
         <property name="description" value="Shedule master RPC API"/>
         <property name="scan" value="true"/>
-        <property name="host" value="${master.swagger.hostport}"/>
+        <property name="host" value="${master.swagger.address}"/>
         <property name="prettyPrint" value="true"/>
     </bean>
     <bean id="apiListingResource" class="io.swagger.jaxrs.listing.ApiListingResource" />
